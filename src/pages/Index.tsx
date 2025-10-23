@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import QuoteCard from "@/components/QuoteCard";
+import OnePieceSection from "@/components/OnePieceSection";
 import heroImage from "@/assets/hero-quote.jpg";
 import quote1 from "@/assets/quote-1.jpg";
 import quote2 from "@/assets/quote-2.jpg";
 import quote3 from "@/assets/quote-3.jpg";
-import quote4 from "@/assets/quote-4.jpg";
+import quote4 from "@/assets/quote-4-luffy.jpg";
 import quote5 from "@/assets/quote-5.jpg";
 import quote6 from "@/assets/quote-6.jpg";
 
@@ -32,11 +33,11 @@ const quotes = [
     japaneseTitle: "ブリーチ"
   },
   {
-    anime: "DRAGON BALL",
-    character: "Son Goku",
-    quote: "Power comes in response to a need, not a desire. You have to create that need.",
+    anime: "ONE PIECE",
+    character: "Monkey D. Luffy",
+    quote: "If you don't take risks, you can't create a future!",
     image: quote4,
-    japaneseTitle: "ドラゴンボール"
+    japaneseTitle: "ワンピース"
   },
   {
     anime: "HUNTER × HUNTER",
@@ -103,6 +104,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* One Piece Section */}
+      <OnePieceSection />
 
       {/* Quotes Grid */}
       <section className="container mx-auto px-6 py-24">
