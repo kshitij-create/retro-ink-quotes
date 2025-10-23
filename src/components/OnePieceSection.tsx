@@ -7,12 +7,6 @@ import nami from "@/assets/op-nami.jpg";
 import sanji from "@/assets/op-sanji.jpg";
 import chopper from "@/assets/op-chopper.jpg";
 import robin from "@/assets/op-robin.jpg";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 const characters = [
   {
@@ -84,7 +78,7 @@ const characters = [
 ];
 
 const OnePieceSection = () => {
-  const [selectedCharacter, setSelectedCharacter] = useState<typeof characters[0] | null>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState(characters[0]);
 
   return (
     <section className="py-24 border-t-2 border-b-2 border-foreground">
@@ -111,25 +105,40 @@ const OnePieceSection = () => {
         </div>
 
         {/* Large Featured Quote */}
-        <div className="mb-16 border-2 border-foreground p-8 md:p-12 bg-secondary/30">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-6">
-              <h3 className="font-serif text-4xl md:text-5xl font-bold leading-tight">
-                "I don't want to conquer anything. I just think the guy with the most freedom in this whole ocean is the Pirate King!"
-              </h3>
-              <div className="space-y-2">
+        <div className="mb-16 border-2 border-foreground p-8 md:p-12 bg-secondary/30 transition-all duration-500">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="space-y-6 animate-fade-in" key={selectedCharacter.name}>
+              <div className="space-y-4">
+                {selectedCharacter.quotes.map((quote, index) => (
+                  <div
+                    key={index}
+                    className="border-l-4 border-red-600 pl-6 py-3 animate-fade-in"
+                    style={{
+                      animationDelay: `${index * 0.1}s`,
+                      animationFillMode: "both"
+                    }}
+                  >
+                    <p className="font-serif text-xl md:text-2xl font-bold leading-tight">
+                      <span className="text-red-600 font-black text-3xl mr-2">"</span>
+                      {quote}
+                      <span className="text-red-600 font-black text-3xl ml-2">"</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-2 pt-4 border-t-2 border-foreground">
                 <p className="font-sans text-lg font-medium tracking-widest">
-                  — MONKEY D. LUFFY
+                  — {selectedCharacter.name}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Chapter 507 | モンキー・D・ルフィ
+                  {selectedCharacter.japanese}
                 </p>
               </div>
             </div>
-            <div className="relative aspect-square border-2 border-foreground overflow-hidden">
+            <div className="relative aspect-square border-2 border-foreground overflow-hidden animate-fade-in" key={selectedCharacter.image}>
               <img 
-                src={luffyAlt} 
-                alt="Monkey D. Luffy"
+                src={selectedCharacter.image} 
+                alt={selectedCharacter.name}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -148,7 +157,11 @@ const OnePieceSection = () => {
               <div 
                 key={index}
                 onClick={() => setSelectedCharacter(character)}
-                className="group border-2 border-foreground bg-background hover:bg-secondary transition-all duration-300 overflow-hidden cursor-pointer"
+                className={`group border-2 transition-all duration-300 overflow-hidden cursor-pointer ${
+                  selectedCharacter.name === character.name 
+                    ? 'border-red-600 bg-secondary shadow-lg' 
+                    : 'border-foreground bg-background hover:bg-secondary'
+                }`}
               >
                 <div className="aspect-square relative overflow-hidden">
                   <img 
@@ -170,39 +183,6 @@ const OnePieceSection = () => {
             ))}
           </div>
         </div>
-
-        {/* Character Quotes Dialog */}
-        <Dialog open={!!selectedCharacter} onOpenChange={() => setSelectedCharacter(null)}>
-          <DialogContent className="max-w-3xl border-2 border-foreground bg-background">
-            <DialogHeader>
-              <DialogTitle className="font-serif text-4xl font-black tracking-tighter border-b-2 border-foreground pb-4">
-                {selectedCharacter?.name}
-              </DialogTitle>
-              <p className="font-sans text-sm tracking-wider text-muted-foreground pt-2">
-                {selectedCharacter?.japanese}
-              </p>
-            </DialogHeader>
-            
-            <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-4">
-              {selectedCharacter?.quotes.map((quote, index) => (
-                <div
-                  key={index}
-                  className="border-l-4 border-red-600 pl-6 py-4 animate-fade-in"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    animationFillMode: "both"
-                  }}
-                >
-                  <p className="font-serif text-lg md:text-xl leading-relaxed">
-                    <span className="text-red-600 font-black text-2xl mr-2">"</span>
-                    {quote}
-                    <span className="text-red-600 font-black text-2xl ml-2">"</span>
-                  </p>
-                </div>
-              ))}
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
     </section>
   );
