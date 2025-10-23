@@ -1,4 +1,5 @@
 import { Users } from "lucide-react";
+import { useState } from "react";
 import quote1 from "@/assets/quote-1.jpg";
 import luffyAlt from "@/assets/quote-4-luffy.jpg";
 import zoro from "@/assets/op-zoro.jpg";
@@ -6,41 +7,85 @@ import nami from "@/assets/op-nami.jpg";
 import sanji from "@/assets/op-sanji.jpg";
 import chopper from "@/assets/op-chopper.jpg";
 import robin from "@/assets/op-robin.jpg";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const characters = [
   {
     name: "MONKEY D. LUFFY",
     japanese: "モンキー・D・ルフィ",
     image: quote1,
+    quotes: [
+      "I don't want to conquer anything. I just think the guy with the most freedom in this whole ocean is the Pirate King!",
+      "If you don't take risks, you can't create a future!",
+      "I'm not gonna die, partner! If I die, the promise between us will be broken!",
+      "Power isn't determined by your size, but the size of your heart and dreams!"
+    ]
   },
   {
     name: "RORONOA ZORO",
     japanese: "ロロノア・ゾロ",
     image: zoro,
+    quotes: [
+      "When the world shoves you around, you just gotta stand up and shove back. It's not like somebody's gonna save you if you start babbling excuses.",
+      "I don't care what the society says. I've never regretted doing anything for my friend.",
+      "If I can't even protect my captain's dream, then whatever ambition I have is nothing but talk!",
+      "Bring on the hardship. It's preferred in a path of carnage."
+    ]
   },
   {
     name: "NAMI",
     japanese: "ナミ",
     image: nami,
+    quotes: [
+      "Life is like a pencil that will surely run out, but will leave the beautiful writing of life.",
+      "Don't start a fight if you can't end it.",
+      "I want to draw a map of the entire world!",
+      "Surviving is what I'm good at!"
+    ]
   },
   {
     name: "VINSMOKE SANJI",
     japanese: "サンジ",
     image: sanji,
+    quotes: [
+      "When do you think people die? When they are shot through the heart by the bullet of a pistol? No. When they are ravaged by an incurable disease? No... It's when they're forgotten!",
+      "A real man forgives a woman for her lies.",
+      "I'll never doubt a lady's tears.",
+      "I can't just abandon a lady who's crying!"
+    ]
   },
   {
     name: "TONY TONY CHOPPER",
     japanese: "トニートニー・チョッパー",
     image: chopper,
+    quotes: [
+      "Compared to the greatness of the world, how important is one man's flag?",
+      "Even if I'm weak, there are people I want to protect.",
+      "I'm not food! I'm a reindeer!",
+      "Everyone has things they can and cannot do. I'll do what you can't do, and you do what I can't do!"
+    ]
   },
   {
     name: "NICO ROBIN",
     japanese: "ニコ・ロビン",
     image: robin,
+    quotes: [
+      "I want to live! Take me out to sea with you!",
+      "Fools who don't respect the past are doomed to repeat it.",
+      "You can't see the whole picture until you look at it from the outside.",
+      "The world isn't perfect. But it's there for us, doing the best it can."
+    ]
   },
 ];
 
 const OnePieceSection = () => {
+  const [selectedCharacter, setSelectedCharacter] = useState<typeof characters[0] | null>(null);
+
   return (
     <section className="py-24 border-t-2 border-b-2 border-foreground">
       <div className="container mx-auto px-6">
@@ -102,7 +147,8 @@ const OnePieceSection = () => {
             {characters.map((character, index) => (
               <div 
                 key={index}
-                className="group border-2 border-foreground bg-background hover:bg-secondary transition-all duration-300 overflow-hidden"
+                onClick={() => setSelectedCharacter(character)}
+                className="group border-2 border-foreground bg-background hover:bg-secondary transition-all duration-300 overflow-hidden cursor-pointer"
               >
                 <div className="aspect-square relative overflow-hidden">
                   <img 
@@ -124,6 +170,39 @@ const OnePieceSection = () => {
             ))}
           </div>
         </div>
+
+        {/* Character Quotes Dialog */}
+        <Dialog open={!!selectedCharacter} onOpenChange={() => setSelectedCharacter(null)}>
+          <DialogContent className="max-w-3xl border-2 border-foreground bg-background">
+            <DialogHeader>
+              <DialogTitle className="font-serif text-4xl font-black tracking-tighter border-b-2 border-foreground pb-4">
+                {selectedCharacter?.name}
+              </DialogTitle>
+              <p className="font-sans text-sm tracking-wider text-muted-foreground pt-2">
+                {selectedCharacter?.japanese}
+              </p>
+            </DialogHeader>
+            
+            <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-4">
+              {selectedCharacter?.quotes.map((quote, index) => (
+                <div
+                  key={index}
+                  className="border-l-4 border-red-600 pl-6 py-4 animate-fade-in"
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    animationFillMode: "both"
+                  }}
+                >
+                  <p className="font-serif text-lg md:text-xl leading-relaxed">
+                    <span className="text-red-600 font-black text-2xl mr-2">"</span>
+                    {quote}
+                    <span className="text-red-600 font-black text-2xl ml-2">"</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
