@@ -152,7 +152,7 @@ const OnePieceSection = () => {
                     : 'border-foreground bg-background hover:bg-secondary'
                 }`}
               >
-                <div className="aspect-square relative overflow-hidden">
+                <div className="aspect-[3/4] relative overflow-hidden">
                   <img 
                     src={character.image} 
                     alt={character.name}
