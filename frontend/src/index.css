@@ -103,3 +103,196 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Manga-style custom animations and effects */
+@layer utilities {
+  /* Slow spin animation */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  /* Speed lines effect */
+  .speed-lines {
+    background: radial-gradient(circle at center, transparent 0%, transparent 50%, currentColor 50%, currentColor 51%, transparent 51%);
+    background-size: 40px 40px;
+  }
+
+  /* Manga halftone pattern */
+  .manga-halftone {
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Comic panel effect */
+  .comic-panel {
+    position: relative;
+    border: 4px solid currentColor;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .comic-panel::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 2px solid currentColor;
+    pointer-events: none;
+  }
+
+  /* Action lines */
+  .action-lines {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      currentColor 2px,
+      currentColor 4px
+    );
+  }
+
+  /* Emphasis effect */
+  .manga-emphasis {
+    position: relative;
+  }
+
+  .manga-emphasis::before,
+  .manga-emphasis::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .manga-emphasis::before {
+    background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.05) 41%, transparent 41%);
+    background-size: 20px 20px;
+  }
+
+  /* Panel reveal animation */
+  @keyframes panel-reveal {
+    0% {
+      clip-path: inset(0 100% 0 0);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .animate-panel-reveal {
+    animation: panel-reveal 0.8s ease-out forwards;
+  }
+
+  /* Manga text bubble */
+  .speech-bubble {
+    position: relative;
+    border: 3px solid currentColor;
+    border-radius: 50px;
+    padding: 1.5rem 2rem;
+    background: white;
+    color: black;
+  }
+
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid currentColor;
+  }
+
+  /* Zoom effect on hover */
+  .manga-zoom {
+    transition: transform 0.3s ease;
+  }
+
+  .manga-zoom:hover {
+    transform: scale(1.05);
+    z-index: 10;
+  }
+
+  /* Focus lines radiating from center */
+  .focus-lines {
+    background: repeating-conic-gradient(
+      from 0deg,
+      transparent 0deg 5deg,
+      currentColor 5deg 6deg
+    );
+  }
+
+  /* Manga panel border styles */
+  .thick-border {
+    border-width: 4px;
+    border-style: solid;
+  }
+
+  .double-border {
+    border: 4px solid currentColor;
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px currentColor;
+  }
+
+  /* Impact effect */
+  @keyframes impact {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-impact {
+    animation: impact 0.5s ease-out;
+  }
+
+  /* Slide in manga panel style */
+  @keyframes slide-in-panel {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in-panel {
+    animation: slide-in-panel 0.6s ease-out forwards;
+  }
+}
+
+/* Scroll animations with Intersection Observer support */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
