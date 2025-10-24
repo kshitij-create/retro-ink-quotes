@@ -108,23 +108,12 @@ const OnePieceSection = () => {
         <div className="mb-16 border-2 border-foreground p-8 md:p-12 bg-secondary/30 transition-all duration-500">
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6 animate-fade-in" key={selectedCharacter.name}>
-              <div className="space-y-4">
-                {selectedCharacter.quotes.map((quote, index) => (
-                  <div
-                    key={index}
-                    className="border-l-4 border-red-600 pl-6 py-3 animate-fade-in"
-                    style={{
-                      animationDelay: `${index * 0.1}s`,
-                      animationFillMode: "both"
-                    }}
-                  >
-                    <p className="font-serif text-xl md:text-2xl font-bold leading-tight">
-                      <span className="text-red-600 font-black text-3xl mr-2">"</span>
-                      {quote}
-                      <span className="text-red-600 font-black text-3xl ml-2">"</span>
-                    </p>
-                  </div>
-                ))}
+              <div>
+                <p className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  <span className="text-red-600 font-black text-5xl md:text-6xl mr-2">"</span>
+                  {selectedCharacter.quotes[0]}
+                  <span className="text-red-600 font-black text-5xl md:text-6xl ml-2">"</span>
+                </p>
               </div>
               <div className="space-y-2 pt-4 border-t-2 border-foreground">
                 <p className="font-sans text-lg font-medium tracking-widest">
