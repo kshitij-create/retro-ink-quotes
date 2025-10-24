@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import QuoteCard from "@/components/QuoteCard";
 import OnePieceSection from "@/components/OnePieceSection";
+import FeaturedSection from "@/components/FeaturedSection";
+import AllAnimeSection from "@/components/AllAnimeSection";
 import heroImage from "@/assets/hero-quote.jpg";
 import quote1 from "@/assets/quote-1.jpg";
 import quote2 from "@/assets/quote-2.jpg";
