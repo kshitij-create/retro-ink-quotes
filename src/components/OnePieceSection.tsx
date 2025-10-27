@@ -1,24 +1,23 @@
 import { Users } from "lucide-react";
 import { useState } from "react";
-import luffy from "@/assets/op-luffy-new.jpg";
+import quote1 from "@/assets/quote-1.jpg";
+import luffyAlt from "@/assets/quote-4-luffy.jpg";
 import zoro from "@/assets/op-zoro.jpg";
 import nami from "@/assets/op-nami.jpg";
-import sanji from "@/assets/op-sanji-new.jpg";
+import sanji from "@/assets/op-sanji.jpg";
 import chopper from "@/assets/op-chopper.jpg";
 import robin from "@/assets/op-robin.jpg";
-import usopp from "@/assets/op-usopp.jpg";
-import franky from "@/assets/op-franky.jpg";
-import brook from "@/assets/op-brook.jpg";
-import jinbe from "@/assets/op-jinbe.jpg";
-import law from "@/assets/op-law.jpg";
 
 const characters = [
   {
     name: "MONKEY D. LUFFY",
     japanese: "モンキー・D・ルフィ",
-    image: luffy,
+    image: quote1,
     quotes: [
       "I don't want to conquer anything. I just think the guy with the most freedom in this whole ocean is the Pirate King!",
+      "If you don't take risks, you can't create a future!",
+      "I'm not gonna die, partner! If I die, the promise between us will be broken!",
+      "Power isn't determined by your size, but the size of your heart and dreams!"
     ]
   },
   {
@@ -27,6 +26,9 @@ const characters = [
     image: zoro,
     quotes: [
       "When the world shoves you around, you just gotta stand up and shove back. It's not like somebody's gonna save you if you start babbling excuses.",
+      "I don't care what the society says. I've never regretted doing anything for my friend.",
+      "If I can't even protect my captain's dream, then whatever ambition I have is nothing but talk!",
+      "Bring on the hardship. It's preferred in a path of carnage."
     ]
   },
   {
@@ -35,6 +37,9 @@ const characters = [
     image: nami,
     quotes: [
       "Life is like a pencil that will surely run out, but will leave the beautiful writing of life.",
+      "Don't start a fight if you can't end it.",
+      "I want to draw a map of the entire world!",
+      "Surviving is what I'm good at!"
     ]
   },
   {
@@ -43,14 +48,9 @@ const characters = [
     image: sanji,
     quotes: [
       "When do you think people die? When they are shot through the heart by the bullet of a pistol? No. When they are ravaged by an incurable disease? No... It's when they're forgotten!",
-    ]
-  },
-  {
-    name: "USOPP",
-    japanese: "ウソップ",
-    image: usopp,
-    quotes: [
-      "I'm sorry I'm so weak... I'm sorry I can't be the hero you wanted me to be... but from now on, I swear I'll never run away again!",
+      "A real man forgives a woman for her lies.",
+      "I'll never doubt a lady's tears.",
+      "I can't just abandon a lady who's crying!"
     ]
   },
   {
@@ -58,7 +58,10 @@ const characters = [
     japanese: "トニートニー・チョッパー",
     image: chopper,
     quotes: [
+      "Compared to the greatness of the world, how important is one man's flag?",
       "Even if I'm weak, there are people I want to protect.",
+      "I'm not food! I'm a reindeer!",
+      "Everyone has things they can and cannot do. I'll do what you can't do, and you do what I can't do!"
     ]
   },
   {
@@ -67,38 +70,9 @@ const characters = [
     image: robin,
     quotes: [
       "I want to live! Take me out to sea with you!",
-    ]
-  },
-  {
-    name: "FRANKY",
-    japanese: "フランキー",
-    image: franky,
-    quotes: [
-      "When you have someone you want to protect, that's when you can become truly strong!",
-    ]
-  },
-  {
-    name: "BROOK",
-    japanese: "ブルック",
-    image: brook,
-    quotes: [
-      "I don't fear death. What I fear is that my once so wonderful life will have been lived in vain!",
-    ]
-  },
-  {
-    name: "JINBE",
-    japanese: "ジンベエ",
-    image: jinbe,
-    quotes: [
-      "The resolution to avoid an evil is what makes a man a man!",
-    ]
-  },
-  {
-    name: "TRAFALGAR LAW",
-    japanese: "トラファルガー・ロー",
-    image: law,
-    quotes: [
-      "If you think I'm gonna trust you just because we're in an alliance, you're mistaken!",
+      "Fools who don't respect the past are doomed to repeat it.",
+      "You can't see the whole picture until you look at it from the outside.",
+      "The world isn't perfect. But it's there for us, doing the best it can."
     ]
   },
 ];
@@ -167,13 +141,12 @@ const OnePieceSection = () => {
             <div className="flex-1 h-px bg-foreground/20" />
           </h3>
           
-          <div className="overflow-x-auto pb-4">
-            <div className="flex gap-4 min-w-min">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {characters.map((character, index) => (
               <div 
                 key={index}
                 onClick={() => setSelectedCharacter(character)}
-                className={`group border-2 transition-all duration-300 overflow-hidden cursor-pointer flex-shrink-0 w-56 ${
+                className={`group border-2 transition-all duration-300 overflow-hidden cursor-pointer ${
                   selectedCharacter.name === character.name 
                     ? 'border-red-600 bg-secondary shadow-lg' 
                     : 'border-foreground bg-background hover:bg-secondary'
@@ -197,7 +170,6 @@ const OnePieceSection = () => {
                 </div>
               </div>
             ))}
-            </div>
           </div>
         </div>
       </div>
